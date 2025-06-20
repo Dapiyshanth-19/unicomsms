@@ -8,6 +8,6 @@ namespace c__final_project.Models
 {
   public static  class Role
     {
-        public static string role { get; set; } 
+        public static string Currentrole { get; set; } 
     }
 }

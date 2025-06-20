@@ -38,5 +38,14 @@ public class CourseController
         }
         return list;
     }
+    public static void DeleteCourse(int courseId)
+    {
+        using (var conn = DBconnection.Getconnection())
+        {
+            var cmd = new SQLiteCommand("DELETE FROM Courses WHERE CourseId = @id", conn);
+            cmd.Parameters.AddWithValue("@id", courseId);
+            cmd.ExecuteNonQuery();
+        }
+    }
 
 }

@@ -15,14 +15,24 @@ using c__final_project.Controllers;
 
 namespace c__final_project
 {
-     
+
     public partial class MainForm : Form
     {
         UserController userController = new UserController();
         public MainForm()
         {
             InitializeComponent();
+            //  ClearFields();
+            textBox1.Focus();
+
         }
+
+        //public void ClearFields()
+        //{
+        //    textBox1.Text = "";
+        //    textBox2.Text = "";
+        //}
+
 
         private void richTextBox1_TextChanged(object sender, EventArgs e)
         {
@@ -38,32 +48,47 @@ namespace c__final_project
         {
             Users users = new Users();
             users.Username = textBox1.Text.Trim();
-            users. Password = textBox2.Text.Trim();
+            users.Password = textBox2.Text.Trim();
 
             Users users1 = userController.ValidateLogin(users);
-            if (users1.Username == users.Username && users1.Password == users.Password)
+            if (users1 != null && users1.Username == users.Username && users1.Password == users.Password)
             {
-               if(users1.Role == "Admin") 
+                if (users1.Role == "Admin")
                 {
-                    Role.role = "Admin";
+
+                    Role.Currentrole = users1.Role;
+
+                    DashbordForm dashbord = new DashbordForm();
+                    dashbord.Show();
+                    this.Hide();
+
                 }
-               else if (users1.Role == "Student") 
+                else if (users1.Role == "Student")
                 {
-                    Role.role = "Student";
+                    Role.Currentrole = "Student";
+                    DashbordForm dashbord = new DashbordForm();
+                    dashbord.Show();
+                    this.Hide();
                 }
-               else if (users1.Role == "Staff")
+                else if (users1.Role == "Staff")
                 {
-                    Role.role ="Staff";
+                    Role.Currentrole = "Staff";
+                    DashbordForm dashbord = new DashbordForm();
+                    dashbord.Show();
+                    this.Hide();
                 }
-               else
+                else
                 {
-                    Role.role = "Lecturer";
+                    Role.Currentrole = "Lecturer";
+                    DashbordForm dashbord = new DashbordForm();
+                    dashbord.Show();
+                    this.Hide();
                 }
-                 DashbordForm dashbord = new DashbordForm();
-                 dashbord.Show();
-                 this.Hide();
-                //DashbordForm dashbord = new DashbordForm(users1.Role); // constructor with role
-                //dashbord.Show();
+                // DashbordForm dashbord = new DashbordForm();
+                //  dashbord.Show();
+                //  this.Hide();
+                // DashbordForm dashbord = new DashbordForm(users1.Role); // constructor with role
+                //  dashbord.Show();
 
             }
             else
@@ -71,7 +96,7 @@ namespace c__final_project
                 MessageBox.Show("Invalid username or password ❌", "Login Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
-            
+
             {
 
             }
@@ -91,9 +116,9 @@ namespace c__final_project
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
             if (checkBox1.Checked)
-                textBox2.PasswordChar = '\0'; 
+                textBox2.PasswordChar = '\0';
             else
-                textBox2.PasswordChar = '*';  
+                textBox2.PasswordChar = '*';
         }
 
 
@@ -108,44 +133,14 @@ namespace c__final_project
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-        //    // Hide everything first
-            //  button1.Visible = false;
-        //    btnSubjects.Visible = false;
-        //    btnStudents.Visible = false;
-        //    btnExams.Visible = false;
-        //    btnMarks.Visible = false;
-        //    btnTimetable.Visible = false;
-        //    btnUsers.Visible = false;
 
-        //    // Show based on role
-        //    if (_role == "Admin")
-        //    {
-        //        btnCourses.Visible = true;
-        //        btnSubjects.Visible = true;
-        //        btnStudents.Visible = true;
-        //        btnExams.Visible = true;
-        //        btnMarks.Visible = true;
-        //        btnTimetable.Visible = true;
-        //        btnUsers.Visible = true;
-        //    }
-        //    else if (_role == "Staff")
-        //    {
-        //        btnStudents.Visible = true;
-        //        btnExams.Visible = true;
-        //        btnMarks.Visible = true;
-        //        btnTimetable.Visible = true;
-        //    }
-        //    else if (_role == "Lecturer")
-        //    {
-        //        btnMarks.Visible = true;
-        //        btnTimetable.Visible = true;
-        //    }
-        //    else if (_role == "Student")
-        //    {
-        //        btnMarks.Visible = true;
-        //        btnTimetable.Visible = true;
-          }
-       }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            this.Close();   
+        }
+    }
 
 
 
@@ -153,5 +148,5 @@ namespace c__final_project
 
 
 
-    
+
 }

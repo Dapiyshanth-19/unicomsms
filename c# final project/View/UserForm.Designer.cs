@@ -50,22 +50,19 @@
             textBox17 = new TextBox();
             label14 = new Label();
             label12 = new Label();
-            label15 = new Label();
-            label17 = new Label();
             label13 = new Label();
-            label16 = new Label();
             radioButton1 = new RadioButton();
             radioButton2 = new RadioButton();
             comboBox1 = new ComboBox();
-            comboBox3 = new ComboBox();
-            comboBox4 = new ComboBox();
-            comboBox5 = new ComboBox();
+            comboBox2 = new ComboBox();
+            label15 = new Label();
             button1 = new Button();
             button2 = new Button();
             label10 = new Label();
             button3 = new Button();
             button4 = new Button();
             dataGridView1 = new DataGridView();
+            btnCheckColumns = new Button();
             tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
@@ -105,16 +102,12 @@
             tableLayoutPanel1.Controls.Add(textBox17, 1, 5);
             tableLayoutPanel1.Controls.Add(label14, 2, 0);
             tableLayoutPanel1.Controls.Add(label12, 2, 1);
-            tableLayoutPanel1.Controls.Add(label15, 2, 2);
-            tableLayoutPanel1.Controls.Add(label17, 2, 3);
             tableLayoutPanel1.Controls.Add(label13, 2, 5);
-            tableLayoutPanel1.Controls.Add(label16, 2, 4);
             tableLayoutPanel1.Controls.Add(radioButton1, 3, 0);
             tableLayoutPanel1.Controls.Add(radioButton2, 4, 0);
             tableLayoutPanel1.Controls.Add(comboBox1, 3, 1);
-            tableLayoutPanel1.Controls.Add(comboBox3, 3, 2);
-            tableLayoutPanel1.Controls.Add(comboBox4, 3, 3);
-            tableLayoutPanel1.Controls.Add(comboBox5, 3, 4);
+            tableLayoutPanel1.Controls.Add(comboBox2, 3, 2);
+            tableLayoutPanel1.Controls.Add(label15, 2, 2);
             tableLayoutPanel1.Location = new Point(27, 44);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
             tableLayoutPanel1.RowCount = 10;
@@ -299,25 +292,6 @@
             label12.TabIndex = 18;
             label12.Text = "Course";
             // 
-            // label15
-            // 
-            label15.AutoSize = true;
-            label15.Location = new Point(369, 72);
-            label15.Name = "label15";
-            label15.Size = new Size(61, 15);
-            label15.TabIndex = 23;
-            label15.Text = "Subject 01";
-            label15.Click += label15_Click;
-            // 
-            // label17
-            // 
-            label17.AutoSize = true;
-            label17.Location = new Point(369, 117);
-            label17.Name = "label17";
-            label17.Size = new Size(61, 15);
-            label17.TabIndex = 28;
-            label17.Text = "Subject 02";
-            // 
             // label13
             // 
             label13.AutoSize = true;
@@ -325,15 +299,6 @@
             label13.Name = "label13";
             label13.Size = new Size(0, 15);
             label13.TabIndex = 19;
-            // 
-            // label16
-            // 
-            label16.AutoSize = true;
-            label16.Location = new Point(369, 153);
-            label16.Name = "label16";
-            label16.Size = new Size(61, 15);
-            label16.TabIndex = 29;
-            label16.Text = "Subject 03";
             // 
             // radioButton1
             // 
@@ -369,29 +334,23 @@
             comboBox1.Size = new Size(126, 23);
             comboBox1.TabIndex = 21;
             // 
-            // comboBox3
+            // comboBox2
             // 
-            comboBox3.FormattingEnabled = true;
-            comboBox3.Location = new Point(436, 75);
-            comboBox3.Name = "comboBox3";
-            comboBox3.Size = new Size(126, 23);
-            comboBox3.TabIndex = 24;
+            comboBox2.FormattingEnabled = true;
+            comboBox2.Location = new Point(436, 75);
+            comboBox2.Name = "comboBox2";
+            comboBox2.Size = new Size(121, 23);
+            comboBox2.TabIndex = 31;
             // 
-            // comboBox4
+            // label15
             // 
-            comboBox4.FormattingEnabled = true;
-            comboBox4.Location = new Point(436, 120);
-            comboBox4.Name = "comboBox4";
-            comboBox4.Size = new Size(126, 23);
-            comboBox4.TabIndex = 25;
-            // 
-            // comboBox5
-            // 
-            comboBox5.FormattingEnabled = true;
-            comboBox5.Location = new Point(436, 156);
-            comboBox5.Name = "comboBox5";
-            comboBox5.Size = new Size(126, 23);
-            comboBox5.TabIndex = 26;
+            label15.AutoSize = true;
+            label15.Location = new Point(369, 72);
+            label15.Name = "label15";
+            label15.Size = new Size(51, 15);
+            label15.TabIndex = 23;
+            label15.Text = "Subjects";
+            label15.Click += label15_Click;
             // 
             // button1
             // 
@@ -431,6 +390,7 @@
             button3.TabIndex = 16;
             button3.Text = "Update";
             button3.UseVisualStyleBackColor = true;
+            button3.Click += button3_Click;
             // 
             // button4
             // 
@@ -440,6 +400,7 @@
             button4.TabIndex = 17;
             button4.Text = "Delete";
             button4.UseVisualStyleBackColor = true;
+            button4.Click += button4_Click;
             // 
             // dataGridView1
             // 
@@ -448,12 +409,24 @@
             dataGridView1.Name = "dataGridView1";
             dataGridView1.Size = new Size(626, 361);
             dataGridView1.TabIndex = 18;
+            dataGridView1.CellContentClick += dataGridView1_CellContentClick;
+            // 
+            // btnCheckColumns
+            // 
+            btnCheckColumns.Location = new Point(814, 469);
+            btnCheckColumns.Name = "btnCheckColumns";
+            btnCheckColumns.Size = new Size(75, 23);
+            btnCheckColumns.TabIndex = 19;
+            btnCheckColumns.Text = "button5";
+            btnCheckColumns.UseVisualStyleBackColor = true;
+            btnCheckColumns.Click += btnCheckColumns_Click;
             // 
             // UserForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1313, 531);
+            Controls.Add(btnCheckColumns);
             Controls.Add(dataGridView1);
             Controls.Add(button4);
             Controls.Add(button3);
@@ -502,15 +475,12 @@
         private Label label14;
         private ComboBox comboBox1;
         private Label label15;
-        private ComboBox comboBox3;
-        private ComboBox comboBox4;
-        private Label label17;
-        private ComboBox comboBox5;
-        private Label label16;
         private Button button3;
         private Button button4;
         private DataGridView dataGridView1;
         private RadioButton radioButton1;
         private RadioButton radioButton2;
+        private ComboBox comboBox2;
+        private Button btnCheckColumns;
     }
 }

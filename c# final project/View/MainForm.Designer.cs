@@ -38,6 +38,7 @@
             lable4 = new Label();
             label4 = new Label();
             checkBox1 = new CheckBox();
+            button2 = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
@@ -68,7 +69,6 @@
             textBox2.PasswordChar = '*';
             textBox2.Size = new Size(144, 23);
             textBox2.TabIndex = 2;
-       //   textBox2.TextChanged += this.textBox2_TextChanged;
             // 
             // label1
             // 
@@ -130,11 +130,22 @@
             checkBox1.UseVisualStyleBackColor = true;
             checkBox1.CheckedChanged += checkBox1_CheckedChanged;
             // 
+            // button2
+            // 
+            button2.Location = new Point(814, 399);
+            button2.Name = "button2";
+            button2.Size = new Size(81, 39);
+            button2.TabIndex = 11;
+            button2.Text = "EXIT";
+            button2.UseVisualStyleBackColor = true;
+            button2.Click += button2_Click;
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(907, 450);
+            Controls.Add(button2);
             Controls.Add(checkBox1);
             Controls.Add(label4);
             Controls.Add(lable4);
@@ -163,5 +174,6 @@
         private Label lable4;
         private Label label4;
         private CheckBox checkBox1;
+        private Button button2;
     }
 }

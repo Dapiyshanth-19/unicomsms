@@ -30,12 +30,11 @@
         {
             label1 = new Label();
             button1 = new Button();
-            button2 = new Button();
             button3 = new Button();
             dataGridView1 = new DataGridView();
-            comboBox1 = new ComboBox();
-            label2 = new Label();
-            comboBox2 = new ComboBox();
+            textBox1 = new TextBox();
+            button2 = new Button();
+            button4 = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
@@ -57,71 +56,66 @@
             button1.TabIndex = 2;
             button1.Text = "Add cource";
             button1.UseVisualStyleBackColor = true;
-            // 
-            // button2
-            // 
-            button2.Location = new Point(364, 362);
-            button2.Name = "button2";
-            button2.Size = new Size(75, 23);
-            button2.TabIndex = 3;
-            button2.Text = "Update";
-            button2.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
             // 
             // button3
             // 
-            button3.Location = new Point(500, 362);
+            button3.Location = new Point(369, 362);
             button3.Name = "button3";
             button3.Size = new Size(75, 23);
             button3.TabIndex = 4;
             button3.Text = "Delete";
             button3.UseVisualStyleBackColor = true;
+            button3.Click += button3_Click;
             // 
             // dataGridView1
             // 
+            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView1.Location = new Point(39, 99);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.Size = new Size(700, 227);
             dataGridView1.TabIndex = 5;
+            dataGridView1.CellContentClick += dataGridView1_CellContentClick;
             // 
-            // comboBox1
+            // textBox1
             // 
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Items.AddRange(new object[] { "Python Language", "C# Language", "English", "Management" });
-            comboBox1.Location = new Point(181, 63);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(121, 23);
-            comboBox1.TabIndex = 6;
+            textBox1.Location = new Point(192, 63);
+            textBox1.Name = "textBox1";
+            textBox1.Size = new Size(187, 23);
+            textBox1.TabIndex = 7;
+            textBox1.TextChanged += textBox1_TextChanged;
             // 
-            // label2
+            // button2
             // 
-            label2.AutoSize = true;
-            label2.Location = new Point(376, 69);
-            label2.Name = "label2";
-            label2.Size = new Size(46, 15);
-            label2.TabIndex = 7;
-            label2.Text = "Subject";
+            button2.Location = new Point(12, 12);
+            button2.Name = "button2";
+            button2.Size = new Size(52, 25);
+            button2.TabIndex = 8;
+            button2.Text = "<<<";
+            button2.UseVisualStyleBackColor = true;
+            button2.Click += button2_Click;
             // 
-            // comboBox2
+            // button4
             // 
-            comboBox2.FormattingEnabled = true;
-            comboBox2.Location = new Point(428, 63);
-            comboBox2.Name = "comboBox2";
-            comboBox2.Size = new Size(121, 23);
-            comboBox2.TabIndex = 8;
-            comboBox2.SelectedIndexChanged += comboBox2_SelectedIndexChanged;
+            button4.Location = new Point(521, 66);
+            button4.Name = "button4";
+            button4.Size = new Size(75, 23);
+            button4.TabIndex = 9;
+            button4.Text = "Subjects";
+            button4.UseVisualStyleBackColor = true;
+            button4.Click += button4_Click;
             // 
             // CourseForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
-            Controls.Add(comboBox2);
-            Controls.Add(label2);
-            Controls.Add(comboBox1);
+            Controls.Add(button4);
+            Controls.Add(button2);
+            Controls.Add(textBox1);
             Controls.Add(dataGridView1);
             Controls.Add(button3);
-            Controls.Add(button2);
             Controls.Add(button1);
             Controls.Add(label1);
             Name = "CourseForm";
@@ -136,11 +130,10 @@
 
         private Label label1;
         private Button button1;
-        private Button button2;
         private Button button3;
         private DataGridView dataGridView1;
-        private ComboBox comboBox1;
-        private Label label2;
-        private ComboBox comboBox2;
+        private TextBox textBox1;
+        private Button button2;
+        private Button button4;
     }
 }

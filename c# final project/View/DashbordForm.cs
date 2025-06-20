@@ -1,4 +1,5 @@
-﻿using System;
+﻿using c__final_project.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -38,40 +39,63 @@ namespace c__final_project.View
         {
 
         }
+        //private void DashbordForm_Load(object sender, EventArgs e)
+        //{
+        //    string role = Role.Currentrole;
+        //    }
+
         private void DashbordForm_Load(object sender, EventArgs e)
         {
-            //// Example role-based access code:
-            //string role = comboBox1.SelectedItem?.ToString();
+            string role = Role.Currentrole; // Make sure spelling is EXACT: CurrentRole
 
-            //button1.Visible = false; // Students
-            //button2.Visible = false; // UserDetails
-            //button3.Visible = false; // Exams
-            //button4.Visible = false; // Marks
-            //button5.Visible = false; // Courses
-            //button7.Visible = false; // Timetable
+            // 🔒 First hide everything
+            // Role_Cbox.Visible = false;
+            Students_Btn.Visible = false; // Students
+            UserDeatails_Btn.Visible = false; // UserDetails
+            Exams_Btn.Visible = false; // Exams
+            Marks_Btn.Visible = false; // Marks
+            Course_Btn.Visible = false; // Courses
+            Timetable_Btn.Visible = false; // Timetable
 
-            //if (role == "Admin")
-            //{
-            //    button1.Visible = true;
-            //    button2.Visible = true;
-            //    button3.Visible = true;
-            //    button4.Visible = true;
-            //    button5.Visible = true;
-            //    button7.Visible = true;
-            //}
-            //else if (role == "Staff")
-            //{
-            //    button1.Visible = true;
-            //    button3.Visible = true;
-            //    button4.Visible = true;
-            //    button7.Visible = true;
-            //}
-            //else if (role == "Lecturer" || role == "Student")
-            //{
-            //    button4.Visible = true;
-            //    button7.Visible = true;
-            //}
+            // 🎯 Show based on role
+            if (role == "Admin")
+            {
+                Students_Btn.Visible = true;
+                //  Role_Cbox.Visible = true;
+
+                UserDeatails_Btn.Visible = true;
+                Exams_Btn.Visible = true;
+                Marks_Btn.Visible = true;
+                Course_Btn.Visible = true;
+                Timetable_Btn.Visible = true;
+            }
+            else if (role == "Staff")
+            {
+                Students_Btn.Visible = true;
+                Exams_Btn.Visible = true;
+                Marks_Btn.Visible = true;
+                Timetable_Btn.Visible = true;
+            }
+            else if (role == "Lecturer")
+            {
+                Marks_Btn.Visible = true;
+                Timetable_Btn.Visible = true;
+                Exams_Btn.Visible = true;
+            }
+            else if (role == "Student")
+            {
+                Marks_Btn.Visible = true;
+                Timetable_Btn.Visible = true;
+                Exams_Btn.Visible = true;
+            }
+
+
+            label2.Text = "Role: " + role;
         }
+
+
+
+
 
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
@@ -80,26 +104,27 @@ namespace c__final_project.View
 
         private void button8_Click_1(object sender, EventArgs e)
         {
-            DialogResult result = MessageBox.Show(
-        "Are you sure you want to exit the program?",
-        "Exit Confirmation",
-        MessageBoxButtons.YesNo,
-        MessageBoxIcon.Question
-    );
+
+            DialogResult result = MessageBox.Show("Are you sure you want to logout?", "Confirm Logout", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
             if (result == DialogResult.Yes)
             {
-                Application.Exit(); // 💥 Exits the entire application
+
+                MainForm login = new MainForm();
+                login.Show();
+
+
+                this.Close();
             }
-
-
 
         }
 
-
-    
-
-
+        private void Course_Btn_Click(object sender, EventArgs e)
+        {
+            CourseForm courseForm = new CourseForm();
+            courseForm.Show();
+            this.Hide();
+        }
     }
 }
 

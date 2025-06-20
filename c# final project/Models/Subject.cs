@@ -8,5 +8,8 @@ namespace c__final_project.Models
 {
     internal class Subject
     {
+        public int SubjectID { get; set; }
+        public string SubjectName { get; set; }
+        public string CourseName { get; set; }
     }
 }

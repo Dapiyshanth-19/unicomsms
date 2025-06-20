@@ -17,9 +17,15 @@ namespace c__final_project.Data
                 CREATE TABLE IF NOT EXISTS Users_1 (
                     Id INTEGER PRIMARY KEY AUTOINCREMENT,
                     Username TEXT NOT NULL,
+                    Phonenumber TEXT,
                     Name TEXT NOT NULL,
                     Gender TEXT NOT NULL,
                     Password TEXT NOT NULL,
+                    Email TEXT,
+                    Address TEXT,
+                    DOB TEXT,
+                    Course TEXT,
+                    Subject TEXT,
                     Role TEXT NOT NULL
                 );
 
@@ -29,13 +35,12 @@ namespace c__final_project.Data
                     CourseName TEXT NOT NULL
                 );
 
-                -- Create Subjects Table
                 CREATE TABLE IF NOT EXISTS Subjects (
                     SubjectId INTEGER PRIMARY KEY AUTOINCREMENT,
                     SubjectName TEXT NOT NULL,
-                    CourseId INTEGER,
-                    FOREIGN KEY (CourseId) REFERENCES Courses(CourseId)
-                );
+                    CourseId INTEGER NOT NULL,
+                    FOREIGN KEY (CourseId) REFERENCES Courses(CourseId) ON DELETE CASCADE
+);
 
                 -- Create Students Table
                 CREATE TABLE IF NOT EXISTS Students (

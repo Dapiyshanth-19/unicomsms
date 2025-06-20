@@ -28,61 +28,59 @@
         /// </summary>
         private void InitializeComponent()
         {
-            button2 = new Button();
-            button3 = new Button();
-            button5 = new Button();
+            UserDeatails_Btn = new Button();
+            Exams_Btn = new Button();
+            Course_Btn = new Button();
             panel1 = new Panel();
-            button4 = new Button();
-            button1 = new Button();
-            comboBox1 = new ComboBox();
-            button8 = new Button();
-            button7 = new Button();
+            Marks_Btn = new Button();
+            Students_Btn = new Button();
+            Logout_Btn = new Button();
+            Timetable_Btn = new Button();
             U = new Panel();
             label2 = new Label();
             label1 = new Label();
-            textBox1 = new TextBox();
             panel1.SuspendLayout();
             U.SuspendLayout();
             SuspendLayout();
             // 
-            // button2
+            // UserDeatails_Btn
             // 
-            button2.Location = new Point(19, 134);
-            button2.Name = "button2";
-            button2.Size = new Size(127, 23);
-            button2.TabIndex = 1;
-            button2.Text = "UserDeatails";
-            button2.UseVisualStyleBackColor = true;
-            button2.Click += button2_Click;
+            UserDeatails_Btn.Location = new Point(19, 134);
+            UserDeatails_Btn.Name = "UserDeatails_Btn";
+            UserDeatails_Btn.Size = new Size(127, 23);
+            UserDeatails_Btn.TabIndex = 1;
+            UserDeatails_Btn.Text = "UserDeatails";
+            UserDeatails_Btn.UseVisualStyleBackColor = true;
+            UserDeatails_Btn.Click += button2_Click;
             // 
-            // button3
+            // Exams_Btn
             // 
-            button3.Location = new Point(19, 264);
-            button3.Name = "button3";
-            button3.Size = new Size(127, 23);
-            button3.TabIndex = 2;
-            button3.Text = "Exams";
-            button3.UseVisualStyleBackColor = true;
+            Exams_Btn.Location = new Point(19, 264);
+            Exams_Btn.Name = "Exams_Btn";
+            Exams_Btn.Size = new Size(127, 23);
+            Exams_Btn.TabIndex = 2;
+            Exams_Btn.Text = "Exams";
+            Exams_Btn.UseVisualStyleBackColor = true;
             // 
-            // button5
+            // Course_Btn
             // 
-            button5.Location = new Point(19, 232);
-            button5.Name = "button5";
-            button5.Size = new Size(127, 26);
-            button5.TabIndex = 4;
-            button5.Text = "Course";
-            button5.UseVisualStyleBackColor = true;
+            Course_Btn.Location = new Point(19, 232);
+            Course_Btn.Name = "Course_Btn";
+            Course_Btn.Size = new Size(127, 26);
+            Course_Btn.TabIndex = 4;
+            Course_Btn.Text = "Course";
+            Course_Btn.UseVisualStyleBackColor = true;
+            Course_Btn.Click += Course_Btn_Click;
             // 
             // panel1
             // 
-            panel1.Controls.Add(button4);
-            panel1.Controls.Add(button1);
-            panel1.Controls.Add(comboBox1);
-            panel1.Controls.Add(button8);
-            panel1.Controls.Add(button7);
-            panel1.Controls.Add(button5);
-            panel1.Controls.Add(button3);
-            panel1.Controls.Add(button2);
+            panel1.Controls.Add(Marks_Btn);
+            panel1.Controls.Add(Students_Btn);
+            panel1.Controls.Add(Logout_Btn);
+            panel1.Controls.Add(Timetable_Btn);
+            panel1.Controls.Add(Course_Btn);
+            panel1.Controls.Add(Exams_Btn);
+            panel1.Controls.Add(UserDeatails_Btn);
             panel1.Dock = DockStyle.Left;
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
@@ -90,61 +88,48 @@
             panel1.TabIndex = 6;
             panel1.Paint += panel1_Paint;
             // 
-            // button4
+            // Marks_Btn
             // 
-            button4.Location = new Point(41, 293);
-            button4.Name = "button4";
-            button4.Size = new Size(75, 23);
-            button4.TabIndex = 12;
-            button4.Text = "Marks";
-            button4.UseVisualStyleBackColor = true;
+            Marks_Btn.Location = new Point(41, 293);
+            Marks_Btn.Name = "Marks_Btn";
+            Marks_Btn.Size = new Size(75, 23);
+            Marks_Btn.TabIndex = 12;
+            Marks_Btn.Text = "Marks";
+            Marks_Btn.UseVisualStyleBackColor = true;
             // 
-            // button1
+            // Students_Btn
             // 
-            button1.Location = new Point(41, 174);
-            button1.Name = "button1";
-            button1.Size = new Size(75, 23);
-            button1.TabIndex = 11;
-            button1.Text = "Students";
-            button1.UseVisualStyleBackColor = true;
+            Students_Btn.Location = new Point(19, 163);
+            Students_Btn.Name = "Students_Btn";
+            Students_Btn.Size = new Size(127, 25);
+            Students_Btn.TabIndex = 11;
+            Students_Btn.Text = "Students";
+            Students_Btn.UseVisualStyleBackColor = true;
             // 
-            // comboBox1
+            // Logout_Btn
             // 
-            comboBox1.AutoCompleteCustomSource.AddRange(new string[] { "Admin", "Staff", "Lecturer", "Student" });
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Items.AddRange(new object[] { "Admin", "Staff", "Lecturer", "Student" });
-            comboBox1.Location = new Point(19, 96);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(127, 23);
-            comboBox1.TabIndex = 9;
-            comboBox1.Text = "Role";
-            comboBox1.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
+            Logout_Btn.Location = new Point(41, 402);
+            Logout_Btn.Name = "Logout_Btn";
+            Logout_Btn.Size = new Size(75, 23);
+            Logout_Btn.TabIndex = 8;
+            Logout_Btn.Text = "Logout";
+            Logout_Btn.UseVisualStyleBackColor = true;
+            Logout_Btn.Click += button8_Click_1;
             // 
-            // button8
+            // Timetable_Btn
             // 
-            button8.Location = new Point(41, 402);
-            button8.Name = "button8";
-            button8.Size = new Size(75, 23);
-            button8.TabIndex = 8;
-            button8.Text = "Logout";
-            button8.UseVisualStyleBackColor = true;
-            button8.Click += button8_Click_1;
-            // 
-            // button7
-            // 
-            button7.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            button7.Location = new Point(19, 203);
-            button7.Name = "button7";
-            button7.Size = new Size(127, 23);
-            button7.TabIndex = 5;
-            button7.Text = "Timetable";
-            button7.UseVisualStyleBackColor = true;
+            Timetable_Btn.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            Timetable_Btn.Location = new Point(19, 203);
+            Timetable_Btn.Name = "Timetable_Btn";
+            Timetable_Btn.Size = new Size(127, 23);
+            Timetable_Btn.TabIndex = 5;
+            Timetable_Btn.Text = "Timetable";
+            Timetable_Btn.UseVisualStyleBackColor = true;
             // 
             // U
             // 
             U.Controls.Add(label2);
             U.Controls.Add(label1);
-            U.Controls.Add(textBox1);
             U.Dock = DockStyle.Top;
             U.Location = new Point(164, 0);
             U.Name = "U";
@@ -154,7 +139,7 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(897, 47);
+            label2.Location = new Point(888, 41);
             label2.Name = "label2";
             label2.Size = new Size(36, 15);
             label2.TabIndex = 11;
@@ -171,13 +156,6 @@
             label1.Text = " Unicom TIC Management System";
             label1.Click += label1_Click;
             // 
-            // textBox1
-            // 
-            textBox1.Location = new Point(939, 39);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(133, 23);
-            textBox1.TabIndex = 10;
-            // 
             // DashbordForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -186,7 +164,7 @@
             Controls.Add(U);
             Controls.Add(panel1);
             Name = "DashbordForm";
-            Text = "Dashbord";
+            Text = " ";
             Load += DashbordForm_Load;
             panel1.ResumeLayout(false);
             U.ResumeLayout(false);
@@ -195,18 +173,16 @@
         }
 
         #endregion
-        private Button button2;
-        private Button button3;
-        private Button button5;
+        private Button UserDeatails_Btn;
+        private Button Exams_Btn;
+        private Button Course_Btn;
         private Panel panel1;
         private Panel U;
-        private Button button8;
-        private Button button7;
+        private Button Logout_Btn;
+        private Button Timetable_Btn;
         private Label label1;
-        private ComboBox comboBox1;
-        private TextBox textBox1;
-        private Button button4;
-        private Button button1;
+        private Button Marks_Btn;
+        private Button Students_Btn;
         private Label label2;
     }
 }
