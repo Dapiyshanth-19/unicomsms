@@ -11,7 +11,8 @@ public class CourseController
     {
         using (var conn = DBconnection.Getconnection())
         {
-            
+            conn.Open();
+
             var cmd = new SQLiteCommand("INSERT INTO Courses (CourseName) VALUES (@name)", conn);
             cmd.Parameters.AddWithValue("@name", name);
             cmd.ExecuteNonQuery();
@@ -21,27 +22,36 @@ public class CourseController
     public static List<Courses> GetAllCourses()
     {
         var list = new List<Courses>();
-        using (var conn = DBconnection.Getconnection())
 
+        using (var conn = DBconnection.Getconnection())
         {
-           
-            var cmd = new SQLiteCommand("SELECT * FROM Courses", conn);
-            var reader = cmd.ExecuteReader();
-            while (reader.Read())
+            conn.Open();
+            using (var cmd = new SQLiteCommand("SELECT * FROM Courses", conn))
+            using (var reader = cmd.ExecuteReader())
             {
-                list.Add(new Courses
+                while (reader.Read())
                 {
-                    CourseID = Convert.ToInt32(reader["CourseID"]),
-                    CourseName = reader["CourseName"].ToString() ?? ""//
-                });
+                    list.Add(new Courses
+                    {
+                        CourseID = Convert.ToInt32(reader["CourseID"]),
+                        Coursename = reader["CourseName"]?.ToString() ?? ""
+                    });
+                }
             }
         }
+
+        // Force cleanup
+        GC.Collect();
+        GC.WaitForPendingFinalizers();
+
         return list;
     }
+
     public static void DeleteCourse(int courseId)
     {
         using (var conn = DBconnection.Getconnection())
         {
+            conn.Open();
             var cmd = new SQLiteCommand("DELETE FROM Courses WHERE CourseId = @id", conn);
             cmd.Parameters.AddWithValue("@id", courseId);
             cmd.ExecuteNonQuery();

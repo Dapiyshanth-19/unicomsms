@@ -43,10 +43,12 @@ namespace c__final_project.View
         }
         private void LoadUsers()
         {
-            dataGridView1.DataSource = null;
-            dataGridView1.DataSource = UserController.GetAllUsers();
-
+            var usersTable = UserController.GetAllUsers();
+            Console.WriteLine($"Number of users: {usersTable.Rows.Count}"); // Log the number of users
+            dataGridView1.DataSource = null; // Clear existing data source
+            dataGridView1.DataSource = usersTable; // Set new data source
         }
+
         //private void button2_Click(object sender, EventArgs e)
         //{
         //  //// After adding user, refresh list
@@ -66,30 +68,44 @@ namespace c__final_project.View
             //    MessageBox.Show("Please enter first and last name ❗");
             //    return;
             // On Add Button Click
-            string gender;
-            if (radioButton1.Checked)
+            if (string.IsNullOrWhiteSpace(textBox2.Text) || string.IsNullOrWhiteSpace(textBox3.Text))
             {
-                gender = radioButton1.Text;
+                MessageBox.Show("Please enter username and name ❗");
+                return;
             }
-            else
-            {
-                gender = radioButton2.Text;
-            }
+
+            string gender = radioButton1.Checked ? radioButton1.Text : radioButton2.Text;
+            
             Users user = new Users
             {
                 Username = textBox2.Text,
                 Name = textBox2.Text + " " + textBox3.Text,
-                Password = "123456",
+                Password = "123456", // Consider hashing passwords in a real application
                 Role = cmbRole.Text.Trim(),
-                Gender = gender
+                Gender = gender,
+                Phonenumber = textBox5.Text.Trim(), // Assuming you have a textbox for phone number
+                Email = textBox4.Text.Trim(), // Assuming you have a textbox for email
+                Address = textBox16.Text.Trim(), // Assuming you have a textbox for address
+                DOB = dateTimePicker1.Value.ToString("yyyy-MM-dd"), // Assuming you have a DateTimePicker for DOB
+                Course = comboBox1.SelectedItem?.ToString(), // Assuming you have a ComboBox for Course
+                Subject = textBox17.Text.Trim() // Assuming you have a textbox for Subject
             };
-            MessageBox.Show(user.Role);
-            cmbRole.SelectedIndex = -1;
-            UserController.AddUser(user);
 
-            MessageBox.Show("User Added Successfully!");
-            LoadUsers();
+            try
+            {
+                MessageBox.Show(user.Role);
+                cmbRole.SelectedIndex = -1;
+                UserController userController = new UserController();
+                userController.AddUser(user);
 
+                MessageBox.Show("User Added Successfully!");
+                LoadUsers();
+                ClearForm();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error adding user: {ex.Message}");
+            }
 
 
 
@@ -98,6 +114,13 @@ namespace c__final_project.View
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
+            string selectedRole = comboBox1.SelectedItem?.ToString() ?? "";
+
+            if (selectedRole.Equals("Admin", StringComparison.OrdinalIgnoreCase))
+            {
+                
+            }
+
 
         }
 
@@ -193,7 +216,7 @@ namespace c__final_project.View
                 textBox4.Text = row.Cells["Email"].Value.ToString();
                 textBox5.Text = row.Cells["Phone"].Value.ToString();
                 textBox16.Text = row.Cells["Address"].Value.ToString();
-                textBox17.Text = row.Cells["Department"].Value.ToString();
+                textBox17.Text = row.Cells["Subject"].Value.ToString();
                 comboBox1.SelectedItem = row.Cells["Course"].Value.ToString();
 
                 cmbRole.SelectedItem = row.Cells["Role"].Value.ToString();
@@ -239,9 +262,16 @@ namespace c__final_project.View
                 Id = selectedUserId,
                 Username = textBox2.Text.Trim(),
                 Name = textBox3.Text.Trim(),
+                Email = textBox4.Text.Trim(),
+                Phonenumber = textBox5.Text.Trim(),
+                Address = textBox16.Text.Trim(),
+                Department = textBox17.Text.Trim(),
+                Course = comboBox1.SelectedItem?.ToString(),
+               // Subject = textBoxSubject.Text.Trim(), // Make sure you have this textbox in form
                 Role = cmbRole.SelectedItem?.ToString(),
-                Password = "123456" // Or from another field if editable
-
+                DOB = dateTimePicker1.Value.ToString("yyyy-MM-dd"),
+                Gender = radioButton1.Checked ? radioButton1.Text : radioButton2.Text,
+                Password = "123456"
             };
 
             UserController.UpdateUser(user);

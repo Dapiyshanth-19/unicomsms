@@ -31,13 +31,12 @@
             textBox1 = new TextBox();
             tableLayoutPanel1 = new TableLayoutPanel();
             label11 = new Label();
-            cmbRole = new ComboBox();
+            label3 = new Label();
             dateTimePicker1 = new DateTimePicker();
             textBox5 = new TextBox();
-            textBox4 = new TextBox();
-            label3 = new Label();
             label1 = new Label();
             label2 = new Label();
+            cmbRole = new ComboBox();
             textBox2 = new TextBox();
             textBox3 = new TextBox();
             label4 = new Label();
@@ -56,6 +55,7 @@
             comboBox1 = new ComboBox();
             comboBox2 = new ComboBox();
             label15 = new Label();
+            textBox4 = new TextBox();
             button1 = new Button();
             button2 = new Button();
             label10 = new Label();
@@ -63,6 +63,7 @@
             button4 = new Button();
             dataGridView1 = new DataGridView();
             btnCheckColumns = new Button();
+            sqliteCommand1 = new Microsoft.Data.Sqlite.SqliteCommand();
             tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
@@ -82,14 +83,13 @@
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 67F));
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 138F));
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 71F));
-            tableLayoutPanel1.Controls.Add(label11, 0, 9);
-            tableLayoutPanel1.Controls.Add(cmbRole, 1, 9);
+            tableLayoutPanel1.Controls.Add(label11, 0, 2);
+            tableLayoutPanel1.Controls.Add(label3, 0, 9);
             tableLayoutPanel1.Controls.Add(dateTimePicker1, 1, 7);
             tableLayoutPanel1.Controls.Add(textBox5, 1, 3);
-            tableLayoutPanel1.Controls.Add(textBox4, 1, 2);
-            tableLayoutPanel1.Controls.Add(label3, 0, 2);
             tableLayoutPanel1.Controls.Add(label1, 0, 0);
             tableLayoutPanel1.Controls.Add(label2, 0, 1);
+            tableLayoutPanel1.Controls.Add(cmbRole, 1, 2);
             tableLayoutPanel1.Controls.Add(textBox2, 1, 0);
             tableLayoutPanel1.Controls.Add(textBox3, 1, 1);
             tableLayoutPanel1.Controls.Add(label4, 0, 3);
@@ -108,6 +108,7 @@
             tableLayoutPanel1.Controls.Add(comboBox1, 3, 1);
             tableLayoutPanel1.Controls.Add(comboBox2, 3, 2);
             tableLayoutPanel1.Controls.Add(label15, 2, 2);
+            tableLayoutPanel1.Controls.Add(textBox4, 1, 9);
             tableLayoutPanel1.Location = new Point(27, 44);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
             tableLayoutPanel1.RowCount = 10;
@@ -128,22 +129,20 @@
             // label11
             // 
             label11.AutoSize = true;
-            label11.Location = new Point(3, 322);
+            label11.Location = new Point(3, 72);
             label11.Name = "label11";
             label11.Size = new Size(30, 15);
             label11.TabIndex = 16;
             label11.Text = "Role";
             // 
-            // cmbRole
+            // label3
             // 
-            cmbRole.DropDownStyle = ComboBoxStyle.DropDownList;
-            cmbRole.FormattingEnabled = true;
-            cmbRole.Items.AddRange(new object[] { "Admin", "Staff", "Lecturer", "Student" });
-            cmbRole.Location = new Point(125, 325);
-            cmbRole.Name = "cmbRole";
-            cmbRole.Size = new Size(121, 23);
-            cmbRole.TabIndex = 4;
-            cmbRole.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
+            label3.AutoSize = true;
+            label3.Location = new Point(3, 322);
+            label3.Name = "label3";
+            label3.Size = new Size(83, 15);
+            label3.TabIndex = 4;
+            label3.Text = "Phonenumber";
             // 
             // dateTimePicker1
             // 
@@ -158,22 +157,6 @@
             textBox5.Name = "textBox5";
             textBox5.Size = new Size(100, 23);
             textBox5.TabIndex = 7;
-            // 
-            // textBox4
-            // 
-            textBox4.Location = new Point(125, 75);
-            textBox4.Name = "textBox4";
-            textBox4.Size = new Size(100, 23);
-            textBox4.TabIndex = 6;
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Location = new Point(3, 72);
-            label3.Name = "label3";
-            label3.Size = new Size(83, 15);
-            label3.TabIndex = 4;
-            label3.Text = "Phonenumber";
             // 
             // label1
             // 
@@ -192,6 +175,17 @@
             label2.Size = new Size(58, 15);
             label2.TabIndex = 1;
             label2.Text = "Lastname";
+            // 
+            // cmbRole
+            // 
+            cmbRole.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbRole.FormattingEnabled = true;
+            cmbRole.Items.AddRange(new object[] { "Admin", "Staff", "Lecturer", "Student" });
+            cmbRole.Location = new Point(125, 75);
+            cmbRole.Name = "cmbRole";
+            cmbRole.Size = new Size(121, 23);
+            cmbRole.TabIndex = 4;
+            cmbRole.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
             // 
             // textBox2
             // 
@@ -352,6 +346,13 @@
             label15.Text = "Subjects";
             label15.Click += label15_Click;
             // 
+            // textBox4
+            // 
+            textBox4.Location = new Point(125, 325);
+            textBox4.Name = "textBox4";
+            textBox4.Size = new Size(100, 23);
+            textBox4.TabIndex = 6;
+            // 
             // button1
             // 
             button1.Location = new Point(12, 9);
@@ -421,6 +422,13 @@
             btnCheckColumns.UseVisualStyleBackColor = true;
             btnCheckColumns.Click += btnCheckColumns_Click;
             // 
+            // sqliteCommand1
+            // 
+            sqliteCommand1.CommandTimeout = 30;
+            sqliteCommand1.Connection = null;
+            sqliteCommand1.Transaction = null;
+            sqliteCommand1.UpdatedRowSource = System.Data.UpdateRowSource.None;
+            // 
             // UserForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -482,5 +490,6 @@
         private RadioButton radioButton2;
         private ComboBox comboBox2;
         private Button btnCheckColumns;
+        private Microsoft.Data.Sqlite.SqliteCommand sqliteCommand1;
     }
 }

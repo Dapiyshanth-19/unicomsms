@@ -61,16 +61,16 @@
             // dataGridView1
             // 
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(79, 55);
+            dataGridView1.Location = new Point(79, 133);
             dataGridView1.Name = "dataGridView1";
-            dataGridView1.Size = new Size(601, 325);
+            dataGridView1.Size = new Size(601, 250);
             dataGridView1.TabIndex = 3;
             dataGridView1.CellContentClick += dataGridView1_CellContentClick;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(477, 32);
+            label1.Location = new Point(127, 54);
             label1.Name = "label1";
             label1.Size = new Size(46, 15);
             label1.TabIndex = 4;
@@ -78,7 +78,7 @@
             // 
             // textBox1
             // 
-            textBox1.Location = new Point(529, 29);
+            textBox1.Location = new Point(177, 51);
             textBox1.Name = "textBox1";
             textBox1.Size = new Size(151, 23);
             textBox1.TabIndex = 5;
@@ -97,7 +97,7 @@
             // 
             couse_com.DropDownStyle = ComboBoxStyle.DropDownList;
             couse_com.FormattingEnabled = true;
-            couse_com.Location = new Point(307, 26);
+            couse_com.Location = new Point(177, 17);
             couse_com.Name = "couse_com";
             couse_com.Size = new Size(121, 23);
             couse_com.TabIndex = 7;
@@ -106,7 +106,7 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(257, 32);
+            label2.Location = new Point(127, 20);
             label2.Name = "label2";
             label2.Size = new Size(44, 15);
             label2.TabIndex = 8;

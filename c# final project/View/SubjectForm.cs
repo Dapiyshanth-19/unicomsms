@@ -4,7 +4,7 @@ using System.Data;
 using System.Windows.Forms;
 using System.Data.SQLite;
 using c__final_project.Data;
-using c__final_project.Controllers;  // ✅ Correct namespace
+using c__final_project.Controllers; 
 
 using c__final_project.Controlers;
 using c__final_project.Models;
@@ -17,7 +17,8 @@ namespace c__final_project.View
         public SubjectForm()
         {
             InitializeComponent();
-            LoadSubject(); // ✅ Call method after it's defined
+            LoadCourses();
+            LoadSubject();
             add_combobox();
         }
 
@@ -47,37 +48,63 @@ namespace c__final_project.View
         }
 
         private void LoadSubject()
+            
         {
-            DataTable dt = SubjectController.GetAllSubjects(); // ✅ Correct class name
-            dataGridView1.AutoGenerateColumns = true;  // <--- very important!
-            dataGridView1.DataSource = dt;
+
+            using (var conn = DBconnection.Getconnection())
+            {
+                conn.Open(); // ✨ Always open it before using
+
+                var cmd = new SQLiteCommand(@"
+            SELECT s.SubjectId, s.SubjectName, c.CourseName
+            FROM Subjects s
+            JOIN Courses c ON s.CourseId = c.CourseId;", conn);
+
+                var adapter = new SQLiteDataAdapter(cmd);
+                var dt = new DataTable();
+                adapter.Fill(dt);
+                dataGridView1.DataSource = dt;
+            }
         }
 
         private void LoadCourses()
         {
-            InitializeComponent();
-            LoadSubject();
+            // InitializeComponent();
+            // LoadSubject();
+            var courses = CourseController.GetAllCourses();
+            couse_com.DataSource = courses;
+            couse_com.DisplayMember = "CourseName";
+            couse_com.ValueMember = "CourseId";
+            couse_com.SelectedIndex = -1;
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string SubjectName = textBox1.Text.Trim();
-
-            if (string.IsNullOrWhiteSpace(SubjectName))
+            if (couse_com.SelectedValue == null || string.IsNullOrWhiteSpace(textBox1.Text))
             {
-                MessageBox.Show("Subject name cannot be empty ❗");
+                MessageBox.Show("Please select a course and enter a subject name.");
                 return;
             }
 
-            SubjectController.AddCourse(SubjectName); // ✅ Correct class and method
-            MessageBox.Show("Subject added successfully ");
-            textBox1.Text = "";
+            int courseId = Convert.ToInt32(couse_com.SelectedValue);
+            string subjectName = textBox1.Text.Trim();
+
+            using (var conn = DBconnection.Getconnection())
+            {
+                var cmd = new SQLiteCommand("INSERT INTO Subjects (SubjectName, CourseId) VALUES (@name, @courseId)", conn);
+                cmd.Parameters.AddWithValue("@name", subjectName);
+                cmd.Parameters.AddWithValue("@courseId", courseId);
+                cmd.ExecuteNonQuery();
+            }
+
+            MessageBox.Show("Subject added successfully...");
+            textBox1.Clear();
             LoadSubject();
         }
 
         private void SubjectForm_Load(object sender, EventArgs e)
         {
-            // optional
+            
         }
         public void add_combobox()
         {
@@ -96,5 +123,17 @@ namespace c__final_project.View
         {
            // couse_com.SelectedIndex = -1;
         }
+
+        private void LoadSubject(int courseId)
+        {
+            var subjects = SubjectController.GetSubjectsByCourseID(courseId);
+
+            couse_com.DataSource = null;
+            couse_com.DataSource = subjects;
+            couse_com.DisplayMember = "SubjectName";
+            couse_com.ValueMember = "SubjectId";
+            couse_com.SelectedIndex = -1; // Optional: don't preselect
+        }
+
     }
 }

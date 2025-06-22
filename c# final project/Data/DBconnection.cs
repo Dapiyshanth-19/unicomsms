@@ -18,7 +18,7 @@ namespace c__final_project.Data
         public static SQLiteConnection Getconnection()
         {
             SQLiteConnection conn= new SQLiteConnection(connectionString);
-            conn.Open();
+            //conn.Open();
             return conn;
         }
     }

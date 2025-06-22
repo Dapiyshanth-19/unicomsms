@@ -84,7 +84,7 @@
             panel1.Dock = DockStyle.Left;
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
-            panel1.Size = new Size(164, 450);
+            panel1.Size = new Size(168, 450);
             panel1.TabIndex = 6;
             panel1.Paint += panel1_Paint;
             // 
@@ -131,9 +131,9 @@
             U.Controls.Add(label2);
             U.Controls.Add(label1);
             U.Dock = DockStyle.Top;
-            U.Location = new Point(164, 0);
+            U.Location = new Point(168, 0);
             U.Name = "U";
-            U.Size = new Size(1084, 65);
+            U.Size = new Size(1080, 65);
             U.TabIndex = 7;
             // 
             // label2

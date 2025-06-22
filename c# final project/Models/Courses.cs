@@ -11,6 +11,6 @@ namespace c__final_project.Models
     public class Courses
     {
         public int CourseID { get; set; }
-        public string CourseName { get; set; } = string.Empty;//
+        public string Coursename { get; set; } 
     }
 }
