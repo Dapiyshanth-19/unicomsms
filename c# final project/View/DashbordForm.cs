@@ -11,6 +11,8 @@ using System.Windows.Forms;
 
 namespace c__final_project.View
 {
+   
+
     public partial class DashbordForm : Form
     {
         public DashbordForm()
@@ -46,18 +48,18 @@ namespace c__final_project.View
 
         private void DashbordForm_Load(object sender, EventArgs e)
         {
-            string role = Role.Currentrole; // Make sure spelling is EXACT: CurrentRole
+            string role = Role.Currentrole; 
 
-            // 🔒 First hide everything
+            //  First hide everything
             // Role_Cbox.Visible = false;
             Students_Btn.Visible = false; // Students
             UserDeatails_Btn.Visible = false; // UserDetails
             Exams_Btn.Visible = false; // Exams
             Marks_Btn.Visible = false; // Marks
             Course_Btn.Visible = false; // Courses
-            Timetable_Btn.Visible = false; // Timetable
+            Timetable_Btn.Visible = false; 
 
-            // 🎯 Show based on role
+            //  Show based on role vice dashbord
             if (role == "Admin")
             {
                 Students_Btn.Visible = true;

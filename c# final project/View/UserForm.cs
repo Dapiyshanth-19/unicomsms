@@ -80,23 +80,26 @@ namespace c__final_project.View
             {
                 Username = textBox2.Text,
                 Name = textBox2.Text + " " + textBox3.Text,
-                Password = "123456", // Consider hashing passwords in a real application
+                Password = "123456", 
                 Role = cmbRole.Text.Trim(),
                 Gender = gender,
-                Phonenumber = textBox5.Text.Trim(), // Assuming you have a textbox for phone number
-                Email = textBox4.Text.Trim(), // Assuming you have a textbox for email
-                Address = textBox16.Text.Trim(), // Assuming you have a textbox for address
-                DOB = dateTimePicker1.Value.ToString("yyyy-MM-dd"), // Assuming you have a DateTimePicker for DOB
-                Course = comboBox1.SelectedItem?.ToString(), // Assuming you have a ComboBox for Course
-                Subject = textBox17.Text.Trim() // Assuming you have a textbox for Subject
+                Phonenumber = textBox5.Text.Trim(), 
+                Email = textBox4.Text.Trim(), 
+                Address = textBox16.Text.Trim(), 
+                DOB = dateTimePicker1.Value.ToString("yyyy-MM-dd"), 
+                Course = comboBox1.SelectedItem?.ToString(),
+                Subject = comboBox2.SelectedItem?.ToString()
             };
 
             try
             {
                 MessageBox.Show(user.Role);
                 cmbRole.SelectedIndex = -1;
-                UserController userController = new UserController();
-                userController.AddUser(user);
+                //UserController userController = new UserController();
+                //userController.AddUser(user);
+                UserController.AddUser(user);  
+
+
 
                 MessageBox.Show("User Added Successfully!");
                 LoadUsers();
@@ -114,15 +117,16 @@ namespace c__final_project.View
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string selectedRole = comboBox1.SelectedItem?.ToString() ?? "";
-
-            if (selectedRole.Equals("Admin", StringComparison.OrdinalIgnoreCase))
+            if (comboBox1.SelectedValue != null && int.TryParse(comboBox1.SelectedValue.ToString(), out int courseId))
             {
-                
+                var subjectList = SubjectController.GetSubjectsByCourseID(courseId);
+                comboBox2.DataSource = subjectList;
+                comboBox2.DisplayMember = "SubjectName";
+                comboBox2.ValueMember = "SubjectId";
+                comboBox2.SelectedIndex = -1;
             }
-
-
         }
+
 
         private void AddUser_Load(object sender, EventArgs e)
         {
@@ -216,7 +220,8 @@ namespace c__final_project.View
                 textBox4.Text = row.Cells["Email"].Value.ToString();
                 textBox5.Text = row.Cells["Phone"].Value.ToString();
                 textBox16.Text = row.Cells["Address"].Value.ToString();
-                textBox17.Text = row.Cells["Subject"].Value.ToString();
+                comboBox2.Text = row.Cells["Subject"].Value.ToString(); 
+
                 comboBox1.SelectedItem = row.Cells["Course"].Value.ToString();
 
                 cmbRole.SelectedItem = row.Cells["Role"].Value.ToString();
@@ -267,7 +272,7 @@ namespace c__final_project.View
                 Address = textBox16.Text.Trim(),
                 Department = textBox17.Text.Trim(),
                 Course = comboBox1.SelectedItem?.ToString(),
-               // Subject = textBoxSubject.Text.Trim(), // Make sure you have this textbox in form
+                Subject = comboBox2.SelectedItem?.ToString(),
                 Role = cmbRole.SelectedItem?.ToString(),
                 DOB = dateTimePicker1.Value.ToString("yyyy-MM-dd"),
                 Gender = radioButton1.Checked ? radioButton1.Text : radioButton2.Text,
@@ -277,9 +282,9 @@ namespace c__final_project.View
             UserController.UpdateUser(user);
 
 
-            LoadUsers(); // Refresh the grid
+            LoadUsers(); 
             ClearForm();
-            selectedUserId = -1; // reset after update
+            selectedUserId = -1; 
             MessageBox.Show("User updated successfully...");
         }
 
@@ -298,7 +303,7 @@ namespace c__final_project.View
                     columns += columnName + "\n";
                 }
 
-                MessageBox.Show(columns, "🧾 Columns in Users_1 Table");
+                MessageBox.Show(columns, " Columns in Users_1 Table");
             }
         }
 

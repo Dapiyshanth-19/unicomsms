@@ -47,12 +47,12 @@
             button1.BackColor = SystemColors.HotTrack;
             button1.ForeColor = SystemColors.ControlLight;
             button1.Location = new Point(656, 225);
-            button1.Name = "button1";
+            button1.Name = " btnLogin";
             button1.Size = new Size(75, 23);
             button1.TabIndex = 0;
             button1.Text = "login";
             button1.UseVisualStyleBackColor = false;
-            button1.Click += button1_Click;
+            button1.Click += btnLogin_Click;
             // 
             // textBox1
             // 

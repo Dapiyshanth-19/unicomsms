@@ -10,7 +10,7 @@ namespace c__final_project.Models
 {
     public class Courses
     {
-        public int CourseID { get; set; }
-        public string Coursename { get; set; } 
+        public int CourseId { get; set; }
+        public string CourseName { get; set; } 
     }
 }

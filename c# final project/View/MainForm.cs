@@ -22,16 +22,16 @@ namespace c__final_project
         public MainForm()
         {
             InitializeComponent();
-            //  ClearFields();
+             ClearFields();
             textBox1.Focus();
 
         }
 
-        //public void ClearFields()
-        //{
-        //    textBox1.Text = "";
-        //    textBox2.Text = "";
-        //}
+        public void ClearFields()
+        {
+            textBox1.Text = "";
+            textBox2.Text = "";
+        }
 
 
         private void richTextBox1_TextChanged(object sender, EventArgs e)
@@ -44,61 +44,19 @@ namespace c__final_project
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void btnLogin_Click(object sender, EventArgs e)
         {
-            Users users = new Users();
-            users.Username = textBox1.Text.Trim();
-            users.Password = textBox2.Text.Trim();
+            var user = UserController.ValidateLogin(textBox1.Text, textBox2.Text);
 
-            Users users1 = userController.ValidateLogin(users);
-            if (users1 != null && users1.Username == users.Username && users1.Password == users.Password)
+            if (user != null)
             {
-                if (users1.Role == "Admin")
-                {
-
-                    Role.Currentrole = users1.Role;
-
-                    DashbordForm dashbord = new DashbordForm();
-                    dashbord.Show();
-                    this.Hide();
-
-                }
-                else if (users1.Role == "Student")
-                {
-                    Role.Currentrole = "Student";
-                    DashbordForm dashbord = new DashbordForm();
-                    dashbord.Show();
-                    this.Hide();
-                }
-                else if (users1.Role == "Staff")
-                {
-                    Role.Currentrole = "Staff";
-                    DashbordForm dashbord = new DashbordForm();
-                    dashbord.Show();
-                    this.Hide();
-                }
-                else
-                {
-                    Role.Currentrole = "Lecturer";
-                    DashbordForm dashbord = new DashbordForm();
-                    dashbord.Show();
-                    this.Hide();
-                }
-                // DashbordForm dashbord = new DashbordForm();
-                //  dashbord.Show();
-                //  this.Hide();
-                // DashbordForm dashbord = new DashbordForm(users1.Role); // constructor with role
-                //  dashbord.Show();
-
+                DashbordForm dash = new DashbordForm(user.Role, user.Username); /
+                dash.Show();
+                this.Hide();
             }
             else
             {
-                MessageBox.Show("Invalid username or password ❌", "Login Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-
-
-            {
-
+                MessageBox.Show("Invalid login ❌");
             }
         }
 

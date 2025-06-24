@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace c__final_project.Models
 {
-    internal class Subject
+    public class Subject
     {
         public int SubjectId { get; set; }
         public string SubjectName { get; set; }
-        public string CourseName { get; set; }
     }
+
 }

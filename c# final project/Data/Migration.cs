@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data.SQLite;
+using System.Windows.Forms; 
 using c__final_project.Models;
 
 namespace c__final_project.Data
@@ -12,8 +13,7 @@ namespace c__final_project.Data
             {
                 try
                 {
-                    // Explicitly open the connection
-                    
+                    getconn.Open(); 
 
                     string fullMigrationQuery = @"
                     -- Create Users_1 Table
@@ -25,22 +25,20 @@ namespace c__final_project.Data
                         Gender TEXT NOT NULL,
                         Password TEXT NOT NULL,
                         Email TEXT NOT NULL,
-                        Address TEXT  NOT NULL,
-                        DOB TEXT  NOT NULL,
-                        Course TEXT  NOT NULL,
-                        Subject TEXT  NOT NULL,
+                        Address TEXT NOT NULL,
+                        DOB TEXT NOT NULL,
+                        Course TEXT NOT NULL,
+                        Subject TEXT NOT NULL,
                         Role TEXT NOT NULL
                     );
 
-                   
+                    -- Create Courses Table
                     CREATE TABLE IF NOT EXISTS Courses (
                         CourseId INTEGER PRIMARY KEY AUTOINCREMENT,
-                        
                         CourseName TEXT NOT NULL
-                
                     );
 
-                   
+                    -- Create Subjects Table
                     CREATE TABLE IF NOT EXISTS Subjects (
                         SubjectId INTEGER PRIMARY KEY AUTOINCREMENT,
                         SubjectName TEXT NOT NULL,
@@ -48,7 +46,7 @@ namespace c__final_project.Data
                         FOREIGN KEY (CourseId) REFERENCES Courses(CourseId) ON DELETE CASCADE
                     );
 
-                    
+                    -- Create Students Table
                     CREATE TABLE IF NOT EXISTS Students (
                         StudentId INTEGER PRIMARY KEY AUTOINCREMENT,
                         Name TEXT NOT NULL,
@@ -57,7 +55,7 @@ namespace c__final_project.Data
                         FOREIGN KEY (CourseId) REFERENCES Courses(CourseId)
                     );
 
-                    
+                    -- Create Exams Table
                     CREATE TABLE IF NOT EXISTS Exams (
                         ExamId INTEGER PRIMARY KEY AUTOINCREMENT,
                         ExamName TEXT NOT NULL,
@@ -65,7 +63,7 @@ namespace c__final_project.Data
                         FOREIGN KEY (CourseId) REFERENCES Courses(CourseId)
                     );
 
-                   
+                    -- Create Marks Table
                     CREATE TABLE IF NOT EXISTS Marks (
                         MarkId INTEGER PRIMARY KEY AUTOINCREMENT,
                         StudentId INTEGER,
@@ -77,7 +75,7 @@ namespace c__final_project.Data
                         FOREIGN KEY (ExamId) REFERENCES Exams(ExamId)
                     );
 
-                    
+                    -- Create Timetable Table
                     CREATE TABLE IF NOT EXISTS Timetable (
                         TimetableId INTEGER PRIMARY KEY AUTOINCREMENT,
                         CourseId INTEGER,
@@ -88,49 +86,46 @@ namespace c__final_project.Data
                         FOREIGN KEY (SubjectId) REFERENCES Subjects(SubjectId)
                     );
 
-                    
                     -- Insert default admin user if not exists
-                        INSERT INTO Users_1 
+                    INSERT INTO Users_1 
                         (Username, Phonenumber, Name, Gender, Password, Email, Address, DOB, Course, Subject, Role)
                     SELECT 
-                     'dabi', 
-                     '0750416935',       
-                     'Dabi', 
-                     'Male', 
-                     '12345', 
-                     'dabishanth@gmail.com',  
-                     'jaffna', 
-                     '2004-08-19', 
-                     'None', 
-                     'None', 
-                     'Admin'
-                     WHERE NOT EXISTS (
-                     SELECT 1 FROM Users_1 
-                     WHERE Username = 'dabi' AND Name = 'Dabi' 
-                     AND Password = '12345' AND Role = 'Admin'
-);
-
+                        'dabi', 
+                        '0750416935',       
+                        'Dabi', 
+                        'Male', 
+                        '12345', 
+                        'dabishanth@gmail.com',  
+                        'jaffna', 
+                        '2004-08-19', 
+                        'None', 
+                        'None', 
+                        'Admin'
+                    WHERE NOT EXISTS (
+                        SELECT 1 FROM Users_1 
+                        WHERE Username = 'dabi' AND Name = 'Dabi' 
+                        AND Password = '12345' AND Role = 'Admin'
+                    );
                     ";
 
                     using (var cmd = new SQLiteCommand(fullMigrationQuery, getconn))
                     {
                         int result = cmd.ExecuteNonQuery();
-                        Console.WriteLine($"Migration executed successfully. Rows affected: {result}");
+                        Console.WriteLine($"✅ Migration executed. Rows affected: {result}");
+                        MessageBox.Show(" Database tables created successfully!", "Migration Complete");
                     }
                 }
                 catch (SQLiteException sqlEx)
                 {
-                    Console.WriteLine($"SQL Error during migration: {sqlEx.Message}");
-                    Console.WriteLine($"SQLite Error Code: {sqlEx.ErrorCode}");
+                    MessageBox.Show($"SQLite Error: {sqlEx.Message}", "DB Error");
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine($"General error during migration: {ex.Message}");
+                    MessageBox.Show($"General Error: {ex.Message}", "Error");
                 }
                 finally
                 {
-                    // The connection will be automatically closed by the 'using' statement
-                    Console.WriteLine("Migration process completed");
+                    Console.WriteLine("Migration completed.");
                 }
             }
         }

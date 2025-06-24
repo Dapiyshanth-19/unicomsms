@@ -33,8 +33,8 @@ public class CourseController
                 {
                     list.Add(new Courses
                     {
-                        CourseID = Convert.ToInt32(reader["CourseID"]),
-                        Coursename = reader["CourseName"]?.ToString() ?? ""
+                        CourseId = Convert.ToInt32(reader["CourseID"]),
+                        CourseName = reader["CourseName"]?.ToString() ?? ""
                     });
                 }
             }
