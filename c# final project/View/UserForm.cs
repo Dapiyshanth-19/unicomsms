@@ -94,8 +94,8 @@ namespace c__final_project.View
                 Email = textBox4.Text.Trim(),
                 Address = textBox16.Text.Trim(),
                 DOB = dateTimePicker1.Value.ToString("yyyy-MM-dd"),
-                Course = comboBox1.SelectedItem?.ToString(),
-                Subject = comboBox2.SelectedItem?.ToString()
+                Course = comboBox1.Text?.ToString(),
+                Subject = comboBox2.Text?.ToString()
             };
 
             try
