@@ -2,9 +2,7 @@
 {
     partial class UserForm
     {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
+        
         private System.ComponentModel.IContainer components = null;
 
         /// <summary>
@@ -56,13 +54,13 @@
             comboBox2 = new ComboBox();
             label15 = new Label();
             textBox4 = new TextBox();
+            btnRefreshCourses = new Button();
             button1 = new Button();
             button2 = new Button();
             label10 = new Label();
             button3 = new Button();
             button4 = new Button();
             dataGridView1 = new DataGridView();
-            btnCheckColumns = new Button();
             sqliteCommand1 = new Microsoft.Data.Sqlite.SqliteCommand();
             tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
@@ -109,6 +107,7 @@
             tableLayoutPanel1.Controls.Add(comboBox2, 3, 2);
             tableLayoutPanel1.Controls.Add(label15, 2, 2);
             tableLayoutPanel1.Controls.Add(textBox4, 1, 9);
+            tableLayoutPanel1.Controls.Add(btnRefreshCourses, 3, 7);
             tableLayoutPanel1.Location = new Point(27, 44);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
             tableLayoutPanel1.RowCount = 10;
@@ -327,10 +326,12 @@
             comboBox1.Name = "comboBox1";
             comboBox1.Size = new Size(126, 23);
             comboBox1.TabIndex = 21;
+            comboBox1.SelectedIndexChanged += comboBox1_SelectedIndexChanged_1;
             // 
             // comboBox2
             // 
             comboBox2.FormattingEnabled = true;
+            comboBox2.Items.AddRange(new object[] { "a", "b", "c" });
             comboBox2.Location = new Point(436, 75);
             comboBox2.Name = "comboBox2";
             comboBox2.Size = new Size(121, 23);
@@ -352,6 +353,16 @@
             textBox4.Name = "textBox4";
             textBox4.Size = new Size(100, 23);
             textBox4.TabIndex = 6;
+            // 
+            // btnRefreshCourses
+            // 
+            btnRefreshCourses.Location = new Point(436, 250);
+            btnRefreshCourses.Name = "btnRefreshCourses";
+            btnRefreshCourses.Size = new Size(75, 23);
+            btnRefreshCourses.TabIndex = 32;
+            btnRefreshCourses.Text = "refresh";
+            btnRefreshCourses.UseVisualStyleBackColor = true;
+            btnRefreshCourses.Click += btnRefreshCourses_Click_1;
             // 
             // button1
             // 
@@ -410,17 +421,7 @@
             dataGridView1.Name = "dataGridView1";
             dataGridView1.Size = new Size(626, 361);
             dataGridView1.TabIndex = 18;
-            dataGridView1.CellContentClick += dataGridView1_CellContentClick;
-            // 
-            // btnCheckColumns
-            // 
-            btnCheckColumns.Location = new Point(814, 469);
-            btnCheckColumns.Name = "btnCheckColumns";
-            btnCheckColumns.Size = new Size(75, 23);
-            btnCheckColumns.TabIndex = 19;
-            btnCheckColumns.Text = "button5";
-            btnCheckColumns.UseVisualStyleBackColor = true;
-            btnCheckColumns.Click += btnCheckColumns_Click;
+            dataGridView1.CellClick += dataGridView1_CellClick;
             // 
             // sqliteCommand1
             // 
@@ -434,7 +435,6 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1313, 531);
-            Controls.Add(btnCheckColumns);
             Controls.Add(dataGridView1);
             Controls.Add(button4);
             Controls.Add(button3);
@@ -489,7 +489,7 @@
         private RadioButton radioButton1;
         private RadioButton radioButton2;
         private ComboBox comboBox2;
-        private Button btnCheckColumns;
         private Microsoft.Data.Sqlite.SqliteCommand sqliteCommand1;
+        private Button btnRefreshCourses;
     }
 }

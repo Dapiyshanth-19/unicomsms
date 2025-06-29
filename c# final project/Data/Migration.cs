@@ -16,7 +16,7 @@ namespace c__final_project.Data
                     getconn.Open(); 
 
                     string fullMigrationQuery = @"
-                    -- Create Users_1 Table
+                  
                     CREATE TABLE IF NOT EXISTS Users_1 (
                         Id INTEGER PRIMARY KEY AUTOINCREMENT,
                         Username TEXT NOT NULL,
@@ -32,13 +32,13 @@ namespace c__final_project.Data
                         Role TEXT NOT NULL
                     );
 
-                    -- Create Courses Table
+                   
                     CREATE TABLE IF NOT EXISTS Courses (
                         CourseId INTEGER PRIMARY KEY AUTOINCREMENT,
                         CourseName TEXT NOT NULL
                     );
 
-                    -- Create Subjects Table
+                   
                     CREATE TABLE IF NOT EXISTS Subjects (
                         SubjectId INTEGER PRIMARY KEY AUTOINCREMENT,
                         SubjectName TEXT NOT NULL,
@@ -46,7 +46,7 @@ namespace c__final_project.Data
                         FOREIGN KEY (CourseId) REFERENCES Courses(CourseId) ON DELETE CASCADE
                     );
 
-                    -- Create Students Table
+                    
                     CREATE TABLE IF NOT EXISTS Students (
                         StudentId INTEGER PRIMARY KEY AUTOINCREMENT,
                         Name TEXT NOT NULL,
@@ -55,7 +55,6 @@ namespace c__final_project.Data
                         FOREIGN KEY (CourseId) REFERENCES Courses(CourseId)
                     );
 
-                    -- Create Exams Table
                     CREATE TABLE IF NOT EXISTS Exams (
                         ExamId INTEGER PRIMARY KEY AUTOINCREMENT,
                         ExamName TEXT NOT NULL,
@@ -63,7 +62,7 @@ namespace c__final_project.Data
                         FOREIGN KEY (CourseId) REFERENCES Courses(CourseId)
                     );
 
-                    -- Create Marks Table
+                  
                     CREATE TABLE IF NOT EXISTS Marks (
                         MarkId INTEGER PRIMARY KEY AUTOINCREMENT,
                         StudentId INTEGER,
@@ -75,7 +74,7 @@ namespace c__final_project.Data
                         FOREIGN KEY (ExamId) REFERENCES Exams(ExamId)
                     );
 
-                    -- Create Timetable Table
+                  
                     CREATE TABLE IF NOT EXISTS Timetable (
                         TimetableId INTEGER PRIMARY KEY AUTOINCREMENT,
                         CourseId INTEGER,
@@ -86,7 +85,7 @@ namespace c__final_project.Data
                         FOREIGN KEY (SubjectId) REFERENCES Subjects(SubjectId)
                     );
 
-                    -- Insert default admin user if not exists
+                  
                     INSERT INTO Users_1 
                         (Username, Phonenumber, Name, Gender, Password, Email, Address, DOB, Course, Subject, Role)
                     SELECT 
@@ -111,7 +110,7 @@ namespace c__final_project.Data
                     using (var cmd = new SQLiteCommand(fullMigrationQuery, getconn))
                     {
                         int result = cmd.ExecuteNonQuery();
-                        Console.WriteLine($"✅ Migration executed. Rows affected: {result}");
+                        Console.WriteLine($" Migration executed. Rows affected: {result}");
                         MessageBox.Show(" Database tables created successfully!", "Migration Complete");
                     }
                 }

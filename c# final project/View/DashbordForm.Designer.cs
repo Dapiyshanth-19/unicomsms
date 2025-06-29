@@ -39,6 +39,7 @@
             U = new Panel();
             label2 = new Label();
             label1 = new Label();
+            panel2 = new Panel();
             panel1.SuspendLayout();
             U.SuspendLayout();
             SuspendLayout();
@@ -139,7 +140,7 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(888, 41);
+            label2.Location = new Point(803, 41);
             label2.Name = "label2";
             label2.Size = new Size(36, 15);
             label2.TabIndex = 11;
@@ -156,11 +157,19 @@
             label1.Text = " Unicom TIC Management System";
             label1.Click += label1_Click;
             // 
+            // panel2
+            // 
+            panel2.Location = new Point(168, 59);
+            panel2.Name = "panel2";
+            panel2.Size = new Size(906, 391);
+            panel2.TabIndex = 8;
+            // 
             // DashbordForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1248, 450);
+            Controls.Add(panel2);
             Controls.Add(U);
             Controls.Add(panel1);
             Name = "DashbordForm";
@@ -184,5 +193,6 @@
         private Button Marks_Btn;
         private Button Students_Btn;
         private Label label2;
+        private Panel panel2;
     }
 }

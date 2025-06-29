@@ -35,6 +35,7 @@
             textBox1 = new TextBox();
             button2 = new Button();
             button4 = new Button();
+            comboBox1 = new ComboBox();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
@@ -80,7 +81,7 @@
             // 
             // textBox1
             // 
-            textBox1.Location = new Point(192, 63);
+            textBox1.Location = new Point(160, 35);
             textBox1.Name = "textBox1";
             textBox1.Size = new Size(187, 23);
             textBox1.TabIndex = 7;
@@ -98,19 +99,28 @@
             // 
             // button4
             // 
-            button4.Location = new Point(417, 63);
+            button4.Location = new Point(493, 362);
             button4.Name = "button4";
             button4.Size = new Size(75, 23);
             button4.TabIndex = 9;
-            button4.Text = "Subjects";
+            button4.Text = "EDIT";
             button4.UseVisualStyleBackColor = true;
             button4.Click += button4_Click;
+            // 
+            // comboBox1
+            // 
+            comboBox1.FormattingEnabled = true;
+            comboBox1.Location = new Point(181, 64);
+            comboBox1.Name = "comboBox1";
+            comboBox1.Size = new Size(121, 23);
+            comboBox1.TabIndex = 10;
             // 
             // CourseForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(comboBox1);
             Controls.Add(button4);
             Controls.Add(button2);
             Controls.Add(textBox1);
@@ -135,5 +145,6 @@
         private TextBox textBox1;
         private Button button2;
         private Button button4;
+        private ComboBox comboBox1;
     }
 }

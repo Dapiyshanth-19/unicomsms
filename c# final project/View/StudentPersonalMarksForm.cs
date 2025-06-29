@@ -10,21 +10,11 @@ using System.Windows.Forms;
 
 namespace c__final_project.View
 {
-    public partial class ExamForm : Form
+    public partial class StudentPersonalMarksForm : Form
     {
-        public ExamForm()
+        public StudentPersonalMarksForm()
         {
             InitializeComponent();
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void ExamForm_Load(object sender, EventArgs e)
-        {
-
         }
     }
 }

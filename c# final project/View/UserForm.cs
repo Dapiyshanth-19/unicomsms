@@ -26,32 +26,43 @@ namespace c__final_project.View
         private int selectedUserId = -1;//
 
         public UserForm()
+
+
         {
             InitializeComponent();
             LoadUsers();
-            // Form Load or Constructor
-            cmbRole.DropDownStyle = ComboBoxStyle.DropDownList;
-            cmbRole.Items.AddRange(new string[] { "Admin", "Lecturer", "Staff", "Student" });
-            List<string> roles = new List<string> { "Admin", "Staff", "Student", "Lecturer" };//
-            cmbRole.DataSource = roles;//
+
+            List<string> roles = new List<string> { "Admin", "Staff", "Student", "Lecturer" };
+            cmbRole.DataSource = roles;
             cmbRole.SelectedIndex = -1;
+            LoadCoursesToComboBox();
         }
 
         private void UserForm_Load(object sender, EventArgs e)
         {
-
+            LoadUsers();
+            LoadCoursesToComboBox();
         }
         private void LoadUsers()
         {
             var usersTable = UserController.GetAllUsers();
-            Console.WriteLine($"Number of users: {usersTable.Rows.Count}"); // Log the number of users
-            dataGridView1.DataSource = null; // Clear existing data source
-            dataGridView1.DataSource = usersTable; // Set new data source
+            Console.WriteLine($"Number of users: {usersTable.Rows.Count}");
+            dataGridView1.DataSource = null;
+            dataGridView1.DataSource = usersTable;
+        }
+      
+        private void LoadCourses()
+        {
+            var courses = CourseController.GetAllCourses();
+            comboBox1.DataSource = courses;
+            comboBox1.DisplayMember = "CourseName";
+            comboBox1.ValueMember = "CourseId";
+            comboBox1.SelectedIndex = -1;
         }
 
         //private void button2_Click(object sender, EventArgs e)
         //{
-        //  //// After adding user, refresh list
+        // 
         //    LoadUsers();
 
 
@@ -63,30 +74,26 @@ namespace c__final_project.View
         private void button2_Click(object sender, EventArgs e)
         {
 
-            //if (string.IsNullOrWhiteSpace(textBox2.Text) || string.IsNullOrWhiteSpace(textBox3.Text))
-            //{
-            //    MessageBox.Show("Please enter first and last name ❗");
-            //    return;
-            // On Add Button Click
+
             if (string.IsNullOrWhiteSpace(textBox2.Text) || string.IsNullOrWhiteSpace(textBox3.Text))
             {
-                MessageBox.Show("Please enter username and name ❗");
+                MessageBox.Show("Please enter username and name ");
                 return;
             }
 
             string gender = radioButton1.Checked ? radioButton1.Text : radioButton2.Text;
-            
+
             Users user = new Users
             {
                 Username = textBox2.Text,
                 Name = textBox2.Text + " " + textBox3.Text,
-                Password = "123456", 
+                Password = "123456",
                 Role = cmbRole.Text.Trim(),
                 Gender = gender,
-                Phonenumber = textBox5.Text.Trim(), 
-                Email = textBox4.Text.Trim(), 
-                Address = textBox16.Text.Trim(), 
-                DOB = dateTimePicker1.Value.ToString("yyyy-MM-dd"), 
+                Phonenumber = textBox5.Text.Trim(),
+                Email = textBox4.Text.Trim(),
+                Address = textBox16.Text.Trim(),
+                DOB = dateTimePicker1.Value.ToString("yyyy-MM-dd"),
                 Course = comboBox1.SelectedItem?.ToString(),
                 Subject = comboBox2.SelectedItem?.ToString()
             };
@@ -95,9 +102,9 @@ namespace c__final_project.View
             {
                 MessageBox.Show(user.Role);
                 cmbRole.SelectedIndex = -1;
-                //UserController userController = new UserController();
-                //userController.AddUser(user);
-                UserController.AddUser(user);  
+                UserController userController = new UserController();
+
+                UserController.AddUser(user);
 
 
 
@@ -135,8 +142,8 @@ namespace c__final_project.View
 
         private void btnAddUser_Click(object sender, EventArgs e)
         {
-            //    List<string> roles = new List<string> { "Admin", "Staff", "Student", "Lecturer" };
-            //    cmbRole.DataSource = roles;
+            List<string> roles = new List<string> { "Admin", "Staff", "Student", "Lecturer" };//
+            cmbRole.DataSource = roles;//
         }
 
         private void label15_Click(object sender, EventArgs e)
@@ -148,20 +155,17 @@ namespace c__final_project.View
         {
 
         }
+        private void LoadCoursesToComboBox()
+        {
+            var courseList = CourseController.GetAllCourses();
+            comboBox1.DataSource = courseList;
+            comboBox1.DisplayMember = "CourseName";
+            comboBox1.ValueMember = "CourseId";
+            comboBox1.SelectedIndex = -1;
+        }
 
-        //private void ClearForm()
-        //{
-        //    textBox2.Clear();
-        //    textBox4.Clear();
-        //    textBox3.Clear();
-        //    textBox5.Clear();
 
-        //    textBox16.Clear();
-        //    textBox17.Clear();
-        //    comboBox1.SelectedIndex = -1;
-        //    dateTimePicker1.Value = DateTime.Today;//
 
-        //}
 
         private void ClearForm()
         {
@@ -194,7 +198,7 @@ namespace c__final_project.View
 
         private void UserForm_Load_1(object sender, EventArgs e)
         {
-
+            LoadUsers();//
         }
 
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
@@ -207,7 +211,8 @@ namespace c__final_project.View
 
         }
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+
         {
             if (e.RowIndex >= 0)
             {
@@ -218,21 +223,19 @@ namespace c__final_project.View
                 textBox2.Text = row.Cells["Username"].Value.ToString();
                 textBox3.Text = row.Cells["Name"].Value.ToString();
                 textBox4.Text = row.Cells["Email"].Value.ToString();
-                textBox5.Text = row.Cells["Phone"].Value.ToString();
+                textBox5.Text = row.Cells["Phonenumber"].Value.ToString();
                 textBox16.Text = row.Cells["Address"].Value.ToString();
-                comboBox2.Text = row.Cells["Subject"].Value.ToString(); 
-
-                comboBox1.SelectedItem = row.Cells["Course"].Value.ToString();
-
-                cmbRole.SelectedItem = row.Cells["Role"].Value.ToString();
+                comboBox2.Text = row.Cells["Subject"].Value.ToString();
+                comboBox1.Text = row.Cells["Course"].Value.ToString();
+                cmbRole.Text = row.Cells["Role"].Value.ToString();
 
                 string gender = row.Cells["Gender"].Value.ToString();
-                if (gender == radioButton1.Text)
-                    radioButton1.Checked = true;
-                else
-                    radioButton2.Checked = true;
+                radioButton1.Checked = gender == radioButton1.Text;
+                radioButton2.Checked = gender == radioButton2.Text;
 
                 dateTimePicker1.Value = Convert.ToDateTime(row.Cells["DOB"].Value);
+
+                MessageBox.Show("Selected User ID: " + selectedUserId);
             }
 
         }
@@ -270,9 +273,10 @@ namespace c__final_project.View
                 Email = textBox4.Text.Trim(),
                 Phonenumber = textBox5.Text.Trim(),
                 Address = textBox16.Text.Trim(),
-                Department = textBox17.Text.Trim(),
+
                 Course = comboBox1.SelectedItem?.ToString(),
                 Subject = comboBox2.SelectedItem?.ToString(),
+
                 Role = cmbRole.SelectedItem?.ToString(),
                 DOB = dateTimePicker1.Value.ToString("yyyy-MM-dd"),
                 Gender = radioButton1.Checked ? radioButton1.Text : radioButton2.Text,
@@ -282,9 +286,9 @@ namespace c__final_project.View
             UserController.UpdateUser(user);
 
 
-            LoadUsers(); 
+            LoadUsers();
             ClearForm();
-            selectedUserId = -1; 
+            selectedUserId = -1;
             MessageBox.Show("User updated successfully...");
         }
 
@@ -317,18 +321,51 @@ namespace c__final_project.View
 
             var confirmResult = MessageBox.Show("Are you sure to delete this User?", "Confirm Delete", MessageBoxButtons.YesNo);
             if (confirmResult == DialogResult.Yes)
-
             {
-               // UserController.
-            }    
-
-
+                try
+                {
+                    UserController.DeleteUser(selectedUserId);
+                    MessageBox.Show("User deleted successfully.");
+                    LoadUsers();
+                    ClearForm();
+                    selectedUserId = -1;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error deleting user: " + ex.Message);
+                }
+            }
         }
 
+        private void comboBox1_SelectedIndexChanged_1(object sender, EventArgs e)
+        {
+            if (comboBox1.SelectedValue != null && int.TryParse(comboBox1.SelectedValue.ToString(), out int courseId))
+            {
+                var subjectList = SubjectController.GetSubjectsByCourseID(courseId);
+                //comboBox2.DataSource = subjectList;
+                //comboBox2.DisplayMember = "SubjectName";
+                //comboBox2.ValueMember = "SubjectId";
+                //comboBox2.SelectedIndex = -1;
+
+                {
+                    var subjectLis = SubjectController.GetSubjectsByCourseID(courseId);
+                    comboBox2.DataSource = subjectLis;
+                    comboBox2.DisplayMember = "SubjectName";
+                    comboBox2.ValueMember = "SubjectId";
+                    comboBox2.SelectedIndex = -1;
+                }
+            }
+        }
+
+        private void btnRefreshCourses_Click_1(object sender, EventArgs e)
+        {
+            LoadCoursesToComboBox();
+        }
+        private void btnRefreshCourses_Click(object sender, EventArgs e)
+        {
+           
+        }
     }
-
-
-
 }
 
 

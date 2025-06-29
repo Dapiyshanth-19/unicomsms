@@ -50,7 +50,7 @@ namespace c__final_project.Controllers
             }
         }
 
-        // ✅ Get all users from the database
+        //  Get all users from the database
         public static DataTable GetAllUsers()
         {
             using (var conn = DBconnection.Getconnection())
@@ -137,13 +137,24 @@ namespace c__final_project.Controllers
                 cmd.Parameters.AddWithValue("@Role", user.Role);
                 cmd.Parameters.AddWithValue("@Id", user.Id);
 
-               
+
                 {
                     cmd.ExecuteNonQuery();
                 }
-                
-               
+
             }
         }
+
+       public static void DeleteUser(int userId)
+        {
+            using (var conn = DBconnection.Getconnection())
+            {
+                conn.Open();
+                var cmd = new SQLiteCommand("DELETE FROM Users_1 WHERE Id = @Id", conn);
+                cmd.Parameters.AddWithValue("@Id", userId);
+                cmd.ExecuteNonQuery();
+            }
+        }
+
     }
 }

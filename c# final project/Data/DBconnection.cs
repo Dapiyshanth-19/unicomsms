@@ -7,9 +7,7 @@ using System.Data.SQLite;
 
 namespace c__final_project.Data
 {
-    //public static SQLiteConnection Getconnection()
-    //
-    //return new SQLiteConnection("Data Source=unicom.db;Version=3;");
+    
 
     public static class DBconnection
     {

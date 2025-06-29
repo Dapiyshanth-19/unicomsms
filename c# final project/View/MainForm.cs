@@ -23,7 +23,7 @@ namespace c__final_project
         {
             InitializeComponent();
              ClearFields();
-            textBox1.Focus();
+           // textBox1.Focus();
 
         }
 
@@ -46,19 +46,46 @@ namespace c__final_project
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            var user = UserController.ValidateLogin(textBox1.Text, textBox2.Text);
+            if (string.IsNullOrWhiteSpace(textBox1.Text)
+             || string.IsNullOrWhiteSpace(textBox2.Text))
+            {
+                MessageBox.Show("Please enter both username and password",
+                                "Login Error",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Warning);
+                return;
+            }
 
+            // 2) Build the Users object and validate
+            Users inputUser = new Users
+            {
+                Username = textBox1.Text.Trim(),
+                Password = textBox2.Text.Trim()
+            };
+            Users user = userController.ValidateLogin(inputUser);
+
+            // 3) Check result
             if (user != null)
             {
-                DashbordForm dash = new DashbordForm(user.Role, user.Username); /
+                // 4) Store the role
+                Role.Currentrole = user.Role;
+
+                // 5) Show dashboard
+                var dash = new DashbordForm();
                 dash.Show();
                 this.Hide();
             }
             else
             {
-                MessageBox.Show("Invalid login ❌");
-            }
-        }
+                MessageBox.Show("Invalid username or password ❌",
+                                "Login Failed",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Error);
+            
+        
+    }
+}
+
 
 
         private void textBox1_TextChanged(object sender, EventArgs e)

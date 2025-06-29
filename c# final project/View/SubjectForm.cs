@@ -17,10 +17,31 @@ namespace c__final_project.View
         public SubjectForm()
         {
             InitializeComponent();
-            LoadCourses();
+              LoadCourses();
             LoadSubject();
-            add_combobox();
+             // add_combobox();
+
+            dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
         }
+        private void LoadSubject()
+        {
+            using (var conn = DBconnection.Getconnection())
+            {
+                conn.Open();
+
+                var cmd = new SQLiteCommand(@"
+                    SELECT s.SubjectId, s.SubjectName, c.CourseName
+                    FROM Subjects s
+                    JOIN Courses c ON s.CourseId = c.CourseId;", conn);
+
+                var adapter = new SQLiteDataAdapter(cmd);
+                var dt = new DataTable();
+                adapter.Fill(dt);
+                dataGridView1.DataSource = dt;
+            }
+
+        }
+       
 
         public static DataTable GetAllSubjects()
         {
@@ -37,29 +58,51 @@ namespace c__final_project.View
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            // optional
+
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            CourseForm courseForm = new CourseForm();
-            courseForm.ShowDialog();
-            this.Hide();
+            {
+                CourseForm courseForm = new CourseForm();
+                var result = courseForm.ShowDialog();
+                this.Hide();
+
+                if (result == DialogResult.OK || result == DialogResult.Cancel) 
+                {
+                    LoadCourses(); 
+                }
+            }
         }
 
-        private void LoadSubject()
-            
+       
+        private void LoadCourses()
         {
+            List<Courses> course = CourseController.GetAllCourses();
+            course.Insert(0, new Courses { CourseId = 0, CourseName = "-- Select Course --" }); // 💬 Add default option
+            couse_com.DataSource = course;
+            couse_com.DisplayMember = "CourseName";
+            couse_com.ValueMember = "CourseId";
+            couse_com.SelectedIndex = 0;
+        }
 
+
+
+    
+       
+        private void FilterSubjectsByCourse(int courseId)
+        {
             using (var conn = DBconnection.Getconnection())
             {
-                conn.Open(); // ✨ Always open it before using
+                conn.Open();
 
                 var cmd = new SQLiteCommand(@"
             SELECT s.SubjectId, s.SubjectName, c.CourseName
             FROM Subjects s
-            JOIN Courses c ON s.CourseId = c.CourseId;", conn);
+            JOIN Courses c ON s.CourseId = c.CourseId
+            WHERE s.CourseId = @cid;", conn);
 
+                cmd.Parameters.AddWithValue("@cid", courseId);
                 var adapter = new SQLiteDataAdapter(cmd);
                 var dt = new DataTable();
                 adapter.Fill(dt);
@@ -67,20 +110,9 @@ namespace c__final_project.View
             }
         }
 
-        private void LoadCourses()
-        {
-            // InitializeComponent();
-            // LoadSubject();
-            var courses = CourseController.GetAllCourses();
-            couse_com.DataSource = courses;
-            couse_com.DisplayMember = "CourseName";
-            couse_com.ValueMember = "CourseId";
-            couse_com.SelectedIndex = -1;
-        }
-
         private void button1_Click(object sender, EventArgs e)
         {
-            if (couse_com.SelectedValue == null || string.IsNullOrWhiteSpace(textBox1.Text))
+            if (couse_com.SelectedIndex == 0 || string.IsNullOrWhiteSpace(textBox1.Text))
             {
                 MessageBox.Show("Please select a course and enter a subject name.");
                 return;
@@ -90,7 +122,9 @@ namespace c__final_project.View
             string subjectName = textBox1.Text.Trim();
 
             using (var conn = DBconnection.Getconnection())
+             
             {
+                conn.Open();
                 var cmd = new SQLiteCommand("INSERT INTO Subjects (SubjectName, CourseId) VALUES (@name, @courseId)", conn);
                 cmd.Parameters.AddWithValue("@name", subjectName);
                 cmd.Parameters.AddWithValue("@courseId", courseId);
@@ -104,7 +138,7 @@ namespace c__final_project.View
 
         private void SubjectForm_Load(object sender, EventArgs e)
         {
-            
+
         }
         public void add_combobox()
         {
@@ -121,19 +155,36 @@ namespace c__final_project.View
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-           // couse_com.SelectedIndex = -1;
+            if (couse_com.SelectedIndex > 0)
+            {
+                int courseId = Convert.ToInt32(couse_com.SelectedValue);
+                FilterSubjectsByCourse(courseId);
+            }
         }
 
-        private void LoadSubject(int courseId)
+        private void button2_Click(object sender, EventArgs e)
         {
-            var subjects = SubjectController.GetSubjectsByCourseID(courseId);
+            if (dataGridView1.CurrentRow == null || dataGridView1.CurrentRow.Index < 0)
+            {
+                MessageBox.Show("Please select a subject to delete.");
+                return;
+            }
 
-            couse_com.DataSource = null;
-            couse_com.DataSource = subjects;
-            couse_com.DisplayMember = "SubjectName";
-            couse_com.ValueMember = "SubjectId";
-            couse_com.SelectedIndex = -1; // Optional: don't preselect
+            int subjectId = Convert.ToInt32(dataGridView1.CurrentRow.Cells["SubjectId"].Value);
+
+            DialogResult result = MessageBox.Show("Are you sure you want to delete this subject?", "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result == DialogResult.Yes)
+            {
+                using (var conn = DBconnection.Getconnection())
+                {
+                    conn.Open();
+                    var cmd = new SQLiteCommand("DELETE FROM Subjects WHERE SubjectId = @id", conn);
+                    cmd.Parameters.AddWithValue("@id", subjectId);
+                    cmd.ExecuteNonQuery();
+                }
+                MessageBox.Show("Subject deleted successfully");
+                LoadSubject();
+            }
         }
-
     }
 }

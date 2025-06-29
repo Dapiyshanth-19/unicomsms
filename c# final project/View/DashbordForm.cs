@@ -41,10 +41,7 @@ namespace c__final_project.View
         {
 
         }
-        //private void DashbordForm_Load(object sender, EventArgs e)
-        //{
-        //    string role = Role.Currentrole;
-        //    }
+       
 
         private void DashbordForm_Load(object sender, EventArgs e)
         {

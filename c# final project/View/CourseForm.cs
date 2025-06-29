@@ -19,7 +19,7 @@ namespace c__final_project.View
         public CourseForm()
         {
             InitializeComponent();
-            //  cmbCourceList.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboBox1.DropDownStyle = ComboBoxStyle.DropDownList;//
             LoadCourses();
 
 
@@ -34,7 +34,7 @@ namespace c__final_project.View
 
         private void CourseForm_Load(object sender, EventArgs e)
         {
-
+            LoadCourses();
         }
 
         private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
@@ -48,7 +48,7 @@ namespace c__final_project.View
 
             if (string.IsNullOrWhiteSpace(courseName))
             {
-                MessageBox.Show("Course name cannot be empty ❗");
+                MessageBox.Show("Course name cannot be empty ");
                 return;
             }
 
@@ -83,7 +83,7 @@ namespace c__final_project.View
         {
             if (dataGridView1.SelectedRows.Count == 0)
             {
-                MessageBox.Show("Select a course to delete❗");
+                MessageBox.Show("Select a course to delete");
                 return;
             }
 
@@ -94,7 +94,7 @@ namespace c__final_project.View
             {
                 CourseController.DeleteCourse(courseId);
                 MessageBox.Show("Course deleted sucsessfully...");
-                LoadCourses(); // refresh
+                LoadCourses(); 
             }
         }
 
